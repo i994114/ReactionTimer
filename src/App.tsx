@@ -1,7 +1,11 @@
 import { useState } from 'react';
+import { Routes, Route } from 'react-router-dom';
+//import type { Timer } from './types/timer';
+
+import Home from './components/Home';
 import TimerForm from './components/TimerForm';
 import TimerList from './components/TimerList';
-//import type { Timer } from './types/timer';
+
 import './App.css'
 
 function App() {
@@ -44,12 +48,11 @@ function App() {
 
   return (
     <main className="timer-app">
-      <h1>ReactionTimer</h1>
-      <p>好機を捉える初動を磨く</p>
-
-      <TimerForm onAdd={addTimer} />
-      <TimerList timers={timers} />
-
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/create" element={<TimerForm />}  />
+        {/* <Route path="/training/:id" element={<Training />}  /> */}
+      </Routes>
     </main>
   ); 
 }
