@@ -1,7 +1,7 @@
 import TimerList from './TimerList';
 import { useNavigate } from 'react-router-dom';
 
-function Home() {
+function Home({timers}) {
   const navigate = useNavigate();
 
   return (
@@ -13,7 +13,7 @@ function Home() {
         ＋ 新しい設定を作成
       </button>
 
-      {/* <TimerList /> */}
+      <TimerList timers={timers}/>
     </>
   );
 }

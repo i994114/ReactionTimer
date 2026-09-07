@@ -1,11 +1,10 @@
 import { useState } from 'react';
 import { Routes, Route } from 'react-router-dom';
-//import type { Timer } from './types/timer';
+import type { Timer } from './types/timer';
 
 import Home from './components/Home';
 import TimerForm from './components/TimerForm';
-import TimerList from './components/TimerList';
-
+import Training from './components/Training';
 import './App.css'
 
 function App() {
@@ -32,8 +31,9 @@ function App() {
 
   ]);
 
-  function addTimer(text) {
-    const newTimer = {
+  const id = 1;
+  function addTimer(text: string) {
+    const newTimer: Timer = {
       id: crypto.randomUUID(),
       name: text,
       randomMin: 1,
@@ -49,9 +49,9 @@ function App() {
   return (
     <main className="timer-app">
       <Routes>
-        <Route path="/" element={<Home />} />
+        <Route path="/" element={<Home timers={timers} />} />
         <Route path="/create" element={<TimerForm />}  />
-        {/* <Route path="/training/:id" element={<Training />}  /> */}
+        <Route path="/training/:id" element={<Training />}  />
       </Routes>
     </main>
   ); 
