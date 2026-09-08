@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import type { Timer } from './types/timer';
 import { loadTimers } from '../utils/timerStorage';
-
+import { deleteTimer } from '../utils/timerStorage';
 import TimerList from './TimerList';
 import { useNavigate } from 'react-router-dom';
 
@@ -34,9 +34,17 @@ function Home() {
     () => loadTimers(initialTimers),
   );
 
+  /* タイマー削除(単品) */
+  function handleDelete(id: string) {
+    const updatedTimers = deleteTimer(id);
+    setTimers(updatedTimers);
+  }
+
+  /* タイマー削除(すべて) */
   function clearTimers() {
     localStorage.removeItem('timers');
   }
+
   return (
     <>
       <h1>反応トレーニング</h1>
@@ -47,7 +55,11 @@ function Home() {
       </button>
 
       <button onClick={clearTimers}>すべてのタイマーを削除</button>
-      <TimerList timers={timers}/>
+
+      <TimerList
+        timers={timers}
+        onDelete={handleDelete}
+      />
     </>
   );
 }

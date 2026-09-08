@@ -18,7 +18,7 @@ function isTimer(value: unknown): value is Timer {
   );
 }
 
-
+/* ローカルストレージに保存しているタイマー一覧を呼び出し */
 export function loadTimers(fallback: Timer[]): Timer[] {
   const savedTimers = localStorage.getItem("timers");
 
@@ -39,6 +39,16 @@ export function loadTimers(fallback: Timer[]): Timer[] {
 
 }
 
+/* ローカルストレージにタイマー情報を保存 */
 export function saveTimers(timers: Timer[]): void {
   localStorage.setItem('timers', JSON.stringify(timers));
+}
+
+/* 特定のタイマーを削除 */
+export function deleteTimer(id: string) {
+  const timers = loadTimers([]);
+  const updatedTimers = timers.filter((timer) => timer.id !== id);
+  saveTimers(updatedTimers);
+
+  return updatedTimers;
 }
