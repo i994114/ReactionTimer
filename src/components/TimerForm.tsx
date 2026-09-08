@@ -1,7 +1,8 @@
-import {useState,useEffect} from "react";
+import {useState} from "react";
 import { useNavigate } from "react-router-dom";
 import { loadTimers } from "../utils/timerStorage";
 import { saveTimers } from "../utils/timerStorage";
+import type { Timer } from "../types/timer";
 
 
 

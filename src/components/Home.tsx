@@ -5,7 +5,7 @@ import { loadTimers } from '../utils/timerStorage';
 import TimerList from './TimerList';
 import { useNavigate } from 'react-router-dom';
 
-const initialTimers: Timer = [
+const initialTimers: Timer[] = [
   {
     id: crypto.randomUUID(),
     name: 'training1',
@@ -34,6 +34,9 @@ function Home() {
     () => loadTimers(initialTimers),
   );
 
+  function clearTimers() {
+    localStorage.removeItem('timers');
+  }
   return (
     <>
       <h1>反応トレーニング</h1>
@@ -43,6 +46,7 @@ function Home() {
         ＋ 新しい設定を作成
       </button>
 
+      <button onClick={clearTimers}>すべてのタイマーを削除</button>
       <TimerList timers={timers}/>
     </>
   );
