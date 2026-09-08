@@ -1,8 +1,38 @@
+import { useState } from 'react';
+import type { Timer } from './types/timer';
+import { loadTimers } from '../utils/timerStorage';
+
 import TimerList from './TimerList';
 import { useNavigate } from 'react-router-dom';
 
-function Home({timers}) {
+const initialTimers: Timer = [
+  {
+    id: crypto.randomUUID(),
+    name: 'training1',
+    randomMin: 1,
+    randomMax: 3,
+    trainingTime: 4,
+    interval: 5,
+    rounds: 6,
+  },
+  {
+    id: crypto.randomUUID(),
+    name: 'training2',
+    randomMin: 1,
+    randomMax: 3,
+    trainingTime: 4,
+    interval: 5,
+    rounds: 6,
+  }
+
+];
+
+function Home() {
   const navigate = useNavigate();
+
+  const [timers, setTimers] = useState<Timer[]>(
+    () => loadTimers(initialTimers),
+  );
 
   return (
     <>
