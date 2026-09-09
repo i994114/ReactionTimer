@@ -1,18 +1,22 @@
 import {useState} from "react";
-import { useNavigate } from "react-router-dom";
-import { loadTimers } from "../utils/timerStorage";
+import { useNavigate, useParams } from "react-router-dom";
+import { loadTimer, loadTimers } from "../utils/timerStorage";
 import { saveTimers } from "../utils/timerStorage";
 import type { Timer } from "../types/timer";
 
 
 
 function TimerForm() {
-  const [name, setName] = useState('タイマーセット');
-  const [randomMin, setRandomMin] = useState(1);
-  const [randomMax, setRandomMax] = useState(2);
-  const [trainingTime, setTrainingTime] = useState(30);
-  const [interval, setinterval] = useState(10);
-  const [rounds, setRounds] = useState(1);
+
+  const {id} = useParams();
+  const timer = id? loadTimer(id) : undefined;
+
+  const [name, setName] = useState(timer?.name?? 'タイマーセット');
+  const [randomMin, setRandomMin] = useState(timer?.randomMin?? 1);
+  const [randomMax, setRandomMax] = useState(timer?.randomMax?? 2);
+  const [trainingTime, setTrainingTime] = useState(timer?.trainingTime?? 30);
+  const [interval, setinterval] = useState(timer?.interval?? 10);
+  const [rounds, setRounds] = useState(timer?.rounds?? 1);
 
   const [error, setError] = useState('');
   const navigate = useNavigate();
@@ -21,27 +25,45 @@ function TimerForm() {
     event.preventDefault();
 
     const trimedName = name.trim();
-
+    let updatedTimers: Timer[];
+    
     if (!trimedName) {
       setError('未入力欄があります');
       return
     }
 
-    const newTimer: Timer = {
-    	id: crypto.randomUUID(),
-      name: trimedName,
-      randomMin,
-      randomMax,
-      trainingTime,
-      interval,
-      rounds,
-    };
-
     /* 既存のタイマー一覧を取得 */
     const savedTimers = loadTimers([]);
 
-    /* 新しいタイマーを追加 */
-    const updatedTimers = [...savedTimers, newTimer];
+    if (id) {
+      /* 既存のタイマーを編集 */
+      updatedTimers = savedTimers.map((timer) =>
+        timer.id === id
+          ? {
+              ...timer,
+              name: trimedName,
+              randomMin,
+              randomMax,
+              trainingTime,
+              interval,
+              rounds,
+            }
+          : timer
+      );
+
+    } else {
+      /* 新しいタイマーを追加 */
+      const newTimer: Timer = {
+        id: crypto.randomUUID(),
+        name: trimedName,
+        randomMin,
+        randomMax,
+        trainingTime,
+        interval,
+        rounds,
+      };
+      updatedTimers = [...savedTimers, newTimer];
+    }
 
     /* ローカルストレージへ保存 */
     saveTimers(updatedTimers);

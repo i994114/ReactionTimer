@@ -12,6 +12,7 @@ function App() {
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/create" element={<TimerForm />}  />
+        <Route path="/edit/:id" element={<TimerForm />} />
         <Route path="/training/:id" element={<Training />}  />
       </Routes>
     </main>

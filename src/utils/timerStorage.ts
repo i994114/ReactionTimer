@@ -39,6 +39,12 @@ export function loadTimers(fallback: Timer[]): Timer[] {
 
 }
 
+/* 単品のタイマー情報呼び出し */
+export function loadTimer(id: string): Timer | undefined {
+  const timers = loadTimers([]);
+  return timers.find((timer) => timer.id === id);
+}
+
 /* ローカルストレージにタイマー情報を保存 */
 export function saveTimers(timers: Timer[]): void {
   localStorage.setItem('timers', JSON.stringify(timers));
