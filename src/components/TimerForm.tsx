@@ -26,11 +26,23 @@ function TimerForm() {
 
     const trimedName = name.trim();
     let updatedTimers: Timer[];
-    
+
+    /* バリデーション */    
     if (!trimedName) {
       setError('未入力欄があります');
       return
     }
+
+    if (
+      randomMin <= 0 ||
+      randomMax <= 0 ||
+      trainingTime <= 0 ||
+      interval <= 0 ||
+      rounds <= 0
+    ) {
+      setError('時間・回数は1以上を入力してください');
+      return;
+    }    
 
     /* 既存のタイマー一覧を取得 */
     const savedTimers = loadTimers([]);
