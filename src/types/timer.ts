@@ -2,7 +2,7 @@ export type Timer = {
 	id: string,
 	name: string,
 	randomMin: Number,
-	randomMan: Number,
+	randomMax: Number,
 	trainingTime: Number,
 	interval: Number,
 	rounds: Number,
