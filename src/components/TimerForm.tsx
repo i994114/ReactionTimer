@@ -86,36 +86,42 @@ function TimerForm() {
 
 	return (
 		<form className="" onSubmit={handleSubmit}>
+      タイマー名
 			<input 
 				type="text"
 				value={name}
         onChange={(event) => setName(event.target.value)}
 				placeholder="タイマー名を入力"
 			/>
+      最小
 			<input 
 				type="number"
 				value={randomMin}
         onChange={(event) => setRandomMin(Number(event.target.value))}
 				placeholder="ランダム最小秒"
 			/>
+      最大
 			<input 
 				type="number"
 				value={randomMax}
         onChange={(event) => setRandomMax(Number(event.target.value))}
 				placeholder="ランダム最大秒"
 			/>
+      トレ時間
 			<input 
 				type="number"
 				value={trainingTime}
         onChange={(event) => setTrainingTime(Number(event.target.value))}
 				placeholder="トレーニング時間"
 			/>
+      休憩時間
 			<input 
 				type="number"
 				value={interval}
         onChange={(event) => setinterval(Number(event.target.value))}
 				placeholder="休憩時間"
 			/>
+      ラウンド数
 			<input 
 				type="number"
 				value={rounds}
