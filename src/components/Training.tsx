@@ -9,6 +9,7 @@ function Training() {
   const timer =  id? loadTimer(id) : undefined;
   const [startCountDown, setStartCountDown] = useState(3);
   const [trainingTime, setTrainingTime] = useState(timer?.trainingTime);
+  const [intervalTime, setIntervalTime] = useState(timer?.interval);
 
   //開始ダウンタイマー
   useEffect(() => {
@@ -44,6 +45,26 @@ function Training() {
     return () => clearInterval(timerId);
   },[startCountDown]);
   
+  //インターバル時間
+  useEffect(() => {
+    //トレーニング時間中はカウントしない
+    if (trainingTime > 0) {
+      return;
+    }
+
+    const timerId = setInterval(() => {
+      setIntervalTime((current) => {
+        if (current > 1) {
+          return current - 1;
+        }
+        clearInterval(timerId);
+        return 0;
+      });
+    }, 1000);
+    return () => clearInterval(timerId);
+  }, [trainingTime]);
+
+
   return (
     <div>
       <h1>{timer?.name}</h1>
@@ -61,6 +82,12 @@ function Training() {
         <>
           <h1>トレーニング中</h1>
           <h2>{formatTime(trainingTime)}</h2>
+          <h2>/{formatTime(timer.trainingTime)}</h2>
+
+          <h1>インターバル中</h1>
+          <h2>{formatTime(intervalTime)}</h2>
+          <h2>/{formatTime(timer?.interval)}</h2>
+
         </>
         
       )}
@@ -69,6 +96,7 @@ function Training() {
   );
 }
 
+//設定時間を分、秒に変換する処理
 function formatTime(time: number | undefined) {
   if (time === undefined) {
     return '00:00';
