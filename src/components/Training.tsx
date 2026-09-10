@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, startTransition } from "react";
 import { useParams } from "react-router-dom";
 import { loadTimer } from "../utils/timerStorage";
 import { useNavigate } from "react-router-dom";
@@ -15,7 +15,11 @@ function Training() {
   const [intervalTime, setIntervalTime] = useState(timer?.interval);
   const [currentRound, setCurrentRound] = useState(1);
 
-  const audio = new Audio('/sounds/piro.mp3');
+  const randomAudio = new Audio('/sounds/piro.mp3');
+  const countdownAudio = new Audio('/sounds/countdown.mp3')
+  const trainingStartAudio = new Audio('/sounds/start.mp3')
+  const trainingEndAudio = new Audio('/sounds/end.mp3')
+
   //開始ダウンタイマー
   useEffect(() => {
     if (phase !== 'countdown') {
@@ -44,6 +48,7 @@ function Training() {
     }
 
     setPhase('training');
+    trainingStartAudio.play();
   }, [phase, startCountDown]);
 
   //トレーニング時間
@@ -58,7 +63,7 @@ function Training() {
           return current - 1;
         }
         clearInterval(timerId);
-
+        trainingStartAudio.play();
         return 0;
       });
     },1000)
@@ -79,7 +84,7 @@ function Training() {
         + timer.randomMin;
       
       timeoutId = setTimeout(() => {
-        audio.play();
+        randomAudio.play();
 
         //ならしたら次の音を予約
         playRandomSound();
@@ -101,8 +106,10 @@ function Training() {
 
     if (currentRound < timer.rounds) {
       setPhase('interval');
+      trainingStartAudio.play()
     } else {
       setPhase('finished');
+      trainingEndAudio.play();
     }
   }, [phase, trainingTime]);
 
@@ -144,6 +151,7 @@ function Training() {
     setTrainingTime(timer.trainingTime);
     setIntervalTime(timer.interval);
     setPhase('training');
+    trainingStartAudio.play();
   }, [intervalTime, phase, timer])
 
   //もう一回おこなう処理
@@ -155,6 +163,17 @@ function Training() {
     setPhase('countdown');
   }
 
+  //カウントダウンタイマー音
+  useEffect(() => {
+    if (phase !== 'countdown') {
+      return;
+    }
+
+    if (startCountDown > 0) {
+      countdownAudio.play();
+    }
+
+  }, [startCountDown, phase])
   return (
     <div>
       <h1>{timer?.name}</h1>
