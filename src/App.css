@@ -1,3 +1,7 @@
+* {
+  box-sizing: border-box;
+}
+
 
 .home__btnArea {
   margin-top: 10px;
@@ -12,6 +16,7 @@
   gap: 8px;
   border-radius: 10px;
   border: none;
+  width: 100%;
 }
 .btn:hover {
   cursor: pointer;
@@ -42,4 +47,42 @@
 }
 .card__set--small {
   font-size: small;
+}
+
+.timerForm__form {
+  width: 50%;
+  margin: 0 auto;
+  background-color: blueviolet;
+}
+.timerForm__label {
+  width: 50%;
+  text-align: left;
+  display: block;
+  background-color: aqua;
+}
+.timerForm__input {
+  padding: 10px 5px;
+  margin-bottom: 10px;
+}
+.timerForm__input--normal {
+  width: 100%;
+}
+.timerForm__input--short {
+  width: 40%;
+}
+.timerForm__randomTimeArea {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background-color: chocolate;
+}
+
+.timerForm__btnArea {
+  background-color: chocolate;
+}
+
+
+
+.padding--small {
+  padding: 0 5px;
 }

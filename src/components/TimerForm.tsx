@@ -11,7 +11,7 @@ function TimerForm() {
 
   const {id} = useParams();
   const timer = id? loadTimer(id) : undefined;
-
+  const title = id? '編集' : '設定';
   const [name, setName] = useState(timer?.name?? 'タイマーセット');
   const [randomMin, setRandomMin] = useState(timer?.randomMin?? 1);
   const [randomMax, setRandomMax] = useState(timer?.randomMax?? 2);
@@ -86,54 +86,71 @@ function TimerForm() {
   }
 
 	return (
-		<form className="" onSubmit={handleSubmit}>
-      タイマー名
-			<input 
-				type="text"
-				value={name}
-        onChange={(event) => setName(event.target.value)}
-				placeholder="タイマー名を入力"
-			/>
-      最小
-			<input 
-				type="number"
-				value={randomMin}
-        onChange={(event) => setRandomMin(Number(event.target.value))}
-				placeholder="ランダム最小秒"
-			/>
-      最大
-			<input 
-				type="number"
-				value={randomMax}
-        onChange={(event) => setRandomMax(Number(event.target.value))}
-				placeholder="ランダム最大秒"
-			/>
-      トレ時間
-			<input 
-				type="number"
-				value={trainingTime}
-        onChange={(event) => setTrainingTime(Number(event.target.value))}
-				placeholder="トレーニング時間"
-			/>
-      休憩時間
-			<input 
-				type="number"
-				value={interval}
-        onChange={(event) => setinterval(Number(event.target.value))}
-				placeholder="休憩時間"
-			/>
-      ラウンド数
-			<input 
-				type="number"
-				value={rounds}
-        onChange={(event) => setRounds(Number(event.target.value))}
-				placeholder="何回それをやるか"
-			/>
+    <div>
+      <h1>タイマー{title}</h1>
+      <form className="timerForm__form" onSubmit={handleSubmit}>
+        <label className="timerForm__label">タイマー名</label>
+        <input 
+          className="timerForm__input timerForm__input--normal"
+          type="text"
+          value={name}
+          onChange={(event) => setName(event.target.value)}
+          placeholder="タイマー名を入力"
+        />
 
-			<button className="" type="submit" >保存</button>
+        <label className="timerForm__label">ランダム時間(秒)</label>
+        <div className="timerForm__randomTimeArea">
+          <input
+            className="timerForm__input timerForm__input--short" 
+            type="number"
+            value={randomMin}
+            onChange={(event) => setRandomMin(Number(event.target.value))}
+            placeholder="ランダム最小秒"
+          />
+          <span className="padding--small">〜</span>
+          <input
+            className="timerForm__input timerForm__input--short" 
+            type="number"
+            value={randomMax}
+            onChange={(event) => setRandomMax(Number(event.target.value))}
+            placeholder="ランダム最大秒"
+          />
+        </div>
 
-      {error && <span>{error}</span>}
-		</form>
+        <label className="timerForm__label">トレーニング時間(秒)</label>
+        <input
+          className="timerForm__input timerForm__input--normal" 
+          type="number"
+          value={trainingTime}
+          onChange={(event) => setTrainingTime(Number(event.target.value))}
+          placeholder="トレーニング時間"
+        />
+
+        <label className="timerForm__label">休憩時間(秒)</label>
+        <input
+          className="timerForm__input timerForm__input--normal" 
+          type="number"
+          value={interval}
+          onChange={(event) => setinterval(Number(event.target.value))}
+          placeholder="休憩時間"
+        />
+
+        <label className="timerForm__label">ラウンド数</label>
+        <input
+          className="timerForm__input timerForm__input--normal" 
+          type="number"
+          value={rounds}
+          onChange={(event) => setRounds(Number(event.target.value))}
+          placeholder="何回それをやるか"
+        />
+
+        <div className="timerForm__btnArea timerForm__input--normal">
+          <button className="btn btn--big" type="submit" >保存する</button>
+        </div>
+
+        {error && <span>{error}</span>}
+      </form>
+    </div>
 	);
 }
 
