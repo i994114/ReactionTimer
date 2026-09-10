@@ -1,4 +1,4 @@
-import { useState, useEffect, startTransition } from "react";
+import { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import { loadTimer } from "../utils/timerStorage";
 import { useNavigate } from "react-router-dom";
@@ -11,8 +11,8 @@ function Training() {
   const {id} = useParams();
   const timer =  id? loadTimer(id) : undefined;
   const [startCountDown, setStartCountDown] = useState(3);
-  const [trainingTime, setTrainingTime] = useState(timer?.trainingTime);
-  const [intervalTime, setIntervalTime] = useState(timer?.interval);
+  const [trainingTime, setTrainingTime] = useState(timer?.trainingTime ?? 0);
+  const [intervalTime, setIntervalTime] = useState(timer?.interval ?? 0);
   const [currentRound, setCurrentRound] = useState(1);
 
   const randomAudio = new Audio('/sounds/piro.mp3');
@@ -63,7 +63,6 @@ function Training() {
           return current - 1;
         }
         clearInterval(timerId);
-        trainingStartAudio.play();
         return 0;
       });
     },1000)
@@ -77,11 +76,12 @@ function Training() {
     }
 
     let timeoutId: number;
+    const currentTimer = timer;
 
     function playRandomSound() {
       const randomTime =
-        Math.random() * (timer.randomMax - timer.randomMin)
-        + timer.randomMin;
+        Math.random() * (currentTimer.randomMax - currentTimer.randomMin)
+        + currentTimer.randomMin;
       
       timeoutId = setTimeout(() => {
         randomAudio.play();
@@ -104,6 +104,10 @@ function Training() {
       return;
     }
 
+    if (!timer) {
+      return;
+    }
+
     if (currentRound < timer.rounds) {
       setPhase('interval');
       trainingStartAudio.play()
@@ -122,7 +126,7 @@ function Training() {
 
     const timerId = setInterval(() => {
       setIntervalTime((current) => {
-        if (current !== undefined && current > 0) {
+        if (current > 0) {
           return current - 1;
         }
 
@@ -156,6 +160,10 @@ function Training() {
 
   //もう一回おこなう処理
   function handleRetry() {
+    if (!timer) {
+      return;
+    }
+
     setStartCountDown(3);
     setTrainingTime(timer?.trainingTime);
     setIntervalTime(timer?.interval);
@@ -173,7 +181,12 @@ function Training() {
       countdownAudio.play();
     }
 
-  }, [startCountDown, phase])
+  }, [startCountDown, phase]);
+
+  if (!timer) {
+    return <p>タイマーが見つかりません。</p>;
+  }
+  
   return (
     <div>
       <h1>{timer?.name}</h1>

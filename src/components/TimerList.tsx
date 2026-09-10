@@ -1,12 +1,11 @@
 import { useNavigate } from "react-router-dom";
-import type { deleteTimer } from "../utils/timerStorage";
-import type { Timer
-  
- } from "../types/timer";
+import type { Timer } from "../types/timer";
+
 type Props = {
   timers: Timer[];
   onDelete: (id: string) => void;
 };
+
 function TimerList({ timers, onDelete }: Props) {
   const navigate = useNavigate();
 

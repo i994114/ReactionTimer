@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import type { Timer } from './types/timer';
+import type { Timer } from '../types/timer';
 import { loadTimers } from '../utils/timerStorage';
 import { deleteTimer } from '../utils/timerStorage';
 import TimerList from './TimerList';

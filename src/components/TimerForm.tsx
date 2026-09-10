@@ -2,8 +2,9 @@ import {useState} from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { loadTimer, loadTimers } from "../utils/timerStorage";
 import { saveTimers } from "../utils/timerStorage";
-import type { Timer } from "../types/timer";
 
+import type { Timer } from "../types/timer";
+import type { FormEvent } from "react";
 
 
 function TimerForm() {
@@ -21,7 +22,7 @@ function TimerForm() {
   const [error, setError] = useState('');
   const navigate = useNavigate();
 
-  function handleSubmit(event) {
+  function handleSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
 
     const trimedName = name.trim();
