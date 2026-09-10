@@ -120,6 +120,15 @@ function Training() {
     setPhase('training');
   }, [intervalTime, phase, timer])
 
+  //もう一回おこなう処理
+  function handleRetry() {
+    setStartCountDown(3);
+    setTrainingTime(timer?.trainingTime);
+    setIntervalTime(timer?.interval);
+    setCurrentRound(1);
+    setPhase('countdown');
+  }
+
   return (
     <div>
       <h1>{timer?.name}</h1>
@@ -152,6 +161,11 @@ function Training() {
         </>
       )}
       
+      {phase === 'finished' && (
+        <>
+          <button onClick={handleRetry} >もう一回</button>
+        </>
+      )}
     </div>
   );
 }
@@ -167,4 +181,6 @@ function formatTime(time: number | undefined) {
 
   return `${String(minitues).padStart(2, '0')}:${String(seconds).padStart(2, '0')}`;
 }
+
+
 export default Training;
