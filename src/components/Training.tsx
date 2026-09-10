@@ -15,6 +15,7 @@ function Training() {
   const [intervalTime, setIntervalTime] = useState(timer?.interval);
   const [currentRound, setCurrentRound] = useState(1);
 
+  const audio = new Audio('/sounds/piro.mp3');
   //開始ダウンタイマー
   useEffect(() => {
     if (phase !== 'countdown') {
@@ -64,6 +65,31 @@ function Training() {
     return () => clearInterval(timerId);
   },[phase]);
   
+  //ランダム音
+  useEffect(() => {
+    if (phase !== 'training' || !timer) {
+      return;
+    }
+
+    let timeoutId: number;
+
+    function playRandomSound() {
+      const randomTime =
+        Math.random() * (timer.randomMax - timer.randomMin)
+        + timer.randomMin;
+      
+      timeoutId = setTimeout(() => {
+        audio.play();
+
+        //ならしたら次の音を予約
+        playRandomSound();
+      }, randomTime * 1000);
+    }
+
+    playRandomSound();
+    return () => clearTimeout(timeoutId);
+  }, [phase]);
+
   //トレーニング終了後
   useEffect(() => {
     if (phase !== 'training') {
