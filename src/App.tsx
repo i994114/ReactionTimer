@@ -8,7 +8,7 @@ import './App.css'
 function App() {
   
   return (
-    <main className="timer-app">
+    <main className="main">
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/create" element={<TimerForm />}  />

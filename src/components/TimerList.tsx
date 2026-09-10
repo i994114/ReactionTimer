@@ -1,5 +1,6 @@
 import { useNavigate } from "react-router-dom";
 import type { Timer } from "../types/timer";
+import { Play, Pencil, Trash2 } from 'lucide-react';
 
 type Props = {
   timers: Timer[];
@@ -12,11 +13,26 @@ function TimerList({ timers, onDelete }: Props) {
   return (
     <ul>
       {timers.map((timer) => (
-        <li key={timer.id}>
-          {timer.name}
-          <button onClick={() => navigate(`/training/${timer.id}`)}>開始</button>
-          <button onClick={() => navigate(`/edit/${timer.id}`)}>編集</button>
-          <button onClick={() => onDelete(timer.id)}>削除</button>
+        <li className="card" key={timer.id}>
+          <p className="card__name">{timer.name}</p>
+          <p className="card__set--small">ランダム：{timer.randomMin}秒〜{timer.randomMax}秒</p>
+          <p className="card__time card__set--small">トレーニング：{timer.trainingTime}</p>
+          <p className="card__time card__set--small">インターバル：{timer.interval}</p>
+          <p className="card__set--small">ターン数：{timer.rounds}</p>
+          <div className="card__btnArea">
+            <button className="btn btn--small" onClick={() => navigate(`/training/${timer.id}`)}>
+              <Play size={20}></Play>
+              開始
+            </button>
+            <button className="btn btn--small" onClick={() => navigate(`/edit/${timer.id}`)}>
+              <Pencil size={20}></Pencil>
+              編集
+            </button>
+            <button className="btn btn--small" onClick={() => onDelete(timer.id)}>
+              <Trash2 size={20}></Trash2>
+              削除
+            </button>
+          </div>
         </li>
       ))}
     </ul>

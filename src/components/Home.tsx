@@ -40,21 +40,16 @@ function Home() {
     setTimers(updatedTimers);
   }
 
-  /* タイマー削除(すべて) */
-  function clearTimers() {
-    localStorage.removeItem('timers');
-  }
-
   return (
     <>
       <h1>反応トレーニング</h1>
       <p>好機を捉える初動を磨く</p>
 
-      <button onClick={() => navigate('/create')}>
-        ＋ 新しい設定を作成
-      </button>
-
-      <button onClick={clearTimers}>すべてのタイマーを削除</button>
+      <div className='home__btnArea'>
+        <button className="btn btn--big" onClick={() => navigate('/create')}>
+          ＋ 新しい設定を作成
+        </button>
+      </div>
 
       <TimerList
         timers={timers}
