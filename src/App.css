@@ -130,6 +130,9 @@
 .traing__setCount {
   display: block;
 }
+.training__finishArea {
+  margin-top: 30px;
+}
 
 .padding--small {
   padding: 0 5px;

@@ -238,9 +238,9 @@ function Training() {
       )}
       
       {phase === 'finished' && (
-        <>
-          <button onClick={handleRetry} >もう一回</button>
-        </>
+        <div className="training__finishArea">
+          <button className="btn btn--big" onClick={handleRetry} >もう一回</button>
+        </div>
       )}
     </div>
   );
