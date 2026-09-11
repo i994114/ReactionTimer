@@ -94,19 +94,33 @@
   height: 200px;
   width: 200px;
   border-radius: 200px;
-  border: 10px solid gray;
   position: relative;
   margin: 0 auto;
+
+  background: conic-gradient(
+    aqua 0% var(--progress),
+    gray var(--progress) 100%
+  );
 }
+.training__countArea::before {
+  content: "";
+  position: absolute;
+  inset: 15px;
+  border-radius: 50%;
+  background: white;
+}
+
 .training__count--bottom {
   position: absolute;
   top: 130px;
 }
 .training__count--big {
   font-size: 120px;
+  z-index: 1;
 }
 .training__count--small {
   font-size: 60px;
+  z-index: 1;
 }
 
 .training__setInfo {

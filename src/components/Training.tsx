@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import { loadTimer } from "../utils/timerStorage";
 import { useNavigate } from "react-router-dom";
@@ -19,6 +19,8 @@ function Training() {
   const countdownAudio = new Audio('/sounds/countdown.mp3')
   const trainingStartAudio = new Audio('/sounds/start.mp3')
   const trainingEndAudio = new Audio('/sounds/end.mp3')
+
+  const progress = trainingTime / timer?.trainingTime * 100;
 
   //開始ダウンタイマー
   useEffect(() => {
@@ -209,7 +211,7 @@ function Training() {
         <>
           <h2 className="training__title">トレーニング中</h2>
           <h2 >{currentRound} / {timer?.rounds} TURN</h2>
-          <div className="training__countArea">
+          <div className="training__countArea"  style={{ "--progress": `${progress}%` } as React.CSSProperties}>
             <p className="training__count training__count--small">{formatTime(trainingTime)}</p>
             <span className="training__count training__count--bottom">/{formatTime(timer.trainingTime)}</span>
           </div>
