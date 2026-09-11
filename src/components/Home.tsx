@@ -46,7 +46,7 @@ function Home() {
       <p>好機を捉える初動を磨く</p>
 
       <div className='home__btnArea'>
-        <button className="btn btn--big" onClick={() => navigate('/create')}>
+        <button className="btn btn--big btn--primary" onClick={() => navigate('/create')}>
           ＋ 新しい設定を作成
         </button>
       </div>

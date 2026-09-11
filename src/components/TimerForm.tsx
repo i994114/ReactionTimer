@@ -1,5 +1,5 @@
 import {useState} from "react";
-import { useNavigate, useParams } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import { loadTimer, loadTimers } from "../utils/timerStorage";
 import { saveTimers } from "../utils/timerStorage";
 
@@ -89,13 +89,13 @@ function TimerForm() {
     <div>
       <h1>タイマー{title}</h1>
       <form className="timerForm__form" onSubmit={handleSubmit}>
-        <label className="timerForm__label">タイマー名</label>
+        <label className="timerForm__label">設定名</label>
         <input 
           className="timerForm__input timerForm__input--normal"
           type="text"
           value={name}
           onChange={(event) => setName(event.target.value)}
-          placeholder="タイマー名を入力"
+          placeholder="設定名を入力"
         />
 
         <label className="timerForm__label">ランダム時間(秒)</label>
@@ -145,10 +145,13 @@ function TimerForm() {
         />
 
         <div className="timerForm__btnArea timerForm__input--normal">
-          <button className="btn btn--big" type="submit" >保存する</button>
+          <button className="btn btn--big btn--primary" type="submit" >保存する</button>
         </div>
 
         {error && <span>{error}</span>}
+        <div className="timerForm__backArea">
+          <Link to={"/"}>一覧に戻る</Link>
+        </div>
       </form>
     </div>
 	);
