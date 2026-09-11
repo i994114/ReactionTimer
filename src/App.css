@@ -1,7 +1,9 @@
-* {
-  box-sizing: border-box;
-}
 
+
+main {
+  background-color: #F8FAFC;
+  min-height: 100vh;
+}
 
 .home__btnArea {
   margin-top: 10px;
@@ -10,7 +12,6 @@
 }
 
 .btn {
-  background-color: aqua;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -18,10 +19,12 @@
   border-radius: 10px;
   border: none;
   width: 100%;
+  transition: 0,2s;
 }
 .btn:hover {
   cursor: pointer;
-  background-color: yellow;
+  filter: brightness(50%);
+  transform: translateY(-2px);
 }
 .btn--big {
   padding: 20px;
@@ -35,14 +38,31 @@
   font-weight: bold;
   font-size: large;
 }
-
+.btn--normal {
+  background-color: #2563EB;
+  color: #fff;
+}
+.btn--low {
+  background-color: #F3F4F6;
+  color: #374151;
+}
+.btn--danger {
+  background-color: #FEE2E2;
+  color: #DC2626;
+}
 .card {
-  background-color: blue;
+  background-color: white;
   margin-bottom: 10px;
-  width: 50%;
+  width: 80%;
   margin: 0 auto;
   margin-bottom: 10px;
   padding: 10px;
+  border-radius: 10px;
+  text-align: left;
+}
+.card__name {
+  margin-bottom: 5px;
+  font-weight: bold;
 }
 .card__time {
   display: inline-block;
