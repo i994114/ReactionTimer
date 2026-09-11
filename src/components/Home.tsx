@@ -41,8 +41,8 @@ function Home() {
   }
 
   return (
-    <>
-      <h1>反応トレーニング</h1>
+    <div className='home'>
+      <h1 className='home__title'>反応トレーニング</h1>
       <p>好機を捉える初動を磨く</p>
 
       <div className='home__btnArea'>
@@ -55,7 +55,7 @@ function Home() {
         timers={timers}
         onDelete={handleDelete}
       />
-    </>
+    </div>
   );
 }
 

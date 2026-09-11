@@ -5,10 +5,16 @@ main {
   min-height: 100vh;
 }
 
+.home {
+  padding: 20px;
+}
 .home__btnArea {
   margin-top: 10px;
   margin-bottom: 20px;
   display: inline-block;
+}
+.home__title {
+  padding: 20px 0;
 }
 
 .btn {
@@ -18,16 +24,16 @@ main {
   gap: 8px;
   border-radius: 10px;
   border: none;
-  width: 100%;
-  transition: 0,2s;
+  transition: 0.2s;
 }
 .btn:hover {
   cursor: pointer;
-  filter: brightness(50%);
+  filter: brightness(90%);
   transform: translateY(-2px);
 }
 .btn--big {
   padding: 20px;
+  width: 100%;
 }
 .btn--small {
   padding: 10px;
@@ -41,19 +47,21 @@ main {
 .btn--normal {
   background-color: #2563EB;
   color: #fff;
+  flex: 1;
 }
 .btn--low {
   background-color: #F3F4F6;
   color: #374151;
+  flex: 1;
 }
 .btn--danger {
   background-color: #FEE2E2;
   color: #DC2626;
 }
+
 .card {
   background-color: white;
   margin-bottom: 10px;
-  width: 80%;
   margin: 0 auto;
   margin-bottom: 10px;
   padding: 10px;
@@ -78,7 +86,7 @@ main {
 }
 
 .timerForm__form {
-  width: 50%;
+  width: 70%;
   margin: 0 auto;
 }
 .timerForm__label {
@@ -106,6 +114,11 @@ main {
 .timerForm__backArea {
   margin-top: 20px;
   text-align: right;
+}
+
+
+.training {
+  margin: 20px;
 }
 .training__title {
   margin-top: 20px;

@@ -200,7 +200,7 @@ function Training() {
   return (
     <div className="training">
       <h1>{timer?.name}</h1>
-      <button className="btn btn--big" onClick={() => navigate('/')} >一覧に戻る</button>
+      <button className="btn btn--big btn--primary" onClick={() => navigate('/')} >一覧に戻る</button>
       {phase === 'countdown' && (
         <>
           <h2 className="training__title">トレーニング開始まで</h2>
@@ -239,7 +239,7 @@ function Training() {
       
       {phase === 'finished' && (
         <div className="training__finishArea">
-          <button className="btn btn--big" onClick={handleRetry} >もう一回</button>
+          <button className="btn btn--big btn--primary" onClick={handleRetry} >もう一回</button>
         </div>
       )}
     </div>
@@ -247,7 +247,7 @@ function Training() {
 }
 
 //設定時間を分、秒に変換する処理
-function formatTime(time: number | undefined) {
+export function formatTime(time: number | undefined) {
   if (time === undefined) {
     return '00:00';
   }
