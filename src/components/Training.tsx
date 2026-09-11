@@ -188,32 +188,37 @@ function Training() {
   }
   
   return (
-    <div>
+    <div className="training">
       <h1>{timer?.name}</h1>
-      <button onClick={() => navigate('/')} >一覧に戻る</button>
+      <button className="btn btn--big" onClick={() => navigate('/')} >一覧に戻る</button>
       {phase === 'countdown' && (
         <>
-          <h2>トレーニング開始まで</h2>
-          <h2>{startCountDown}</h2>
-          <p>ランダム：{timer?.randomMin}〜{timer.randomMax}</p>
-          <p>トレーニング{timer?.trainingTime}</p>
-          <p>インターバル：{timer?.interval}</p>
-          <p>ターン数：{timer?.rounds}</p>        
+          <h2 className="training__title">トレーニング開始まで</h2>
+          <div className="training__countArea"><p className="training__count training__count--big">{startCountDown}</p></div>
+          
+          <div className="training__setInfo">
+            <p>ランダム：{timer?.randomMin}秒〜{timer.randomMax}秒</p>
+            <p>トレーニング{formatTime(timer?.trainingTime)}</p>
+            <p>インターバル：{formatTime(timer?.interval)}</p>
+            <p>ターン数：{timer?.rounds}</p>        
+          </div>
         </>
       )}
       
       {phase === 'training' && (
         <>
-          <h2>{currentRound} / {timer?.rounds}</h2>
-          <h1>トレーニング中</h1>
-          <h2>{formatTime(trainingTime)}</h2>
-          <h2>/{formatTime(timer.trainingTime)}</h2>
+          <h2 className="training__title">トレーニング中</h2>
+          <h2 >{currentRound} / {timer?.rounds} TURN</h2>
+          <div className="training__countArea">
+            <p className="training__count training__count--small">{formatTime(trainingTime)}</p>
+            <span className="training__count training__count--bottom">/{formatTime(timer.trainingTime)}</span>
+          </div>
         </>
       )}
 
       {phase === 'interval' && (
         <>
-          <h1>インターバル中</h1>
+          <h2 className="training__title">インターバル中</h2>
           <h2>{formatTime(intervalTime)}</h2>
           <h2>/{formatTime(timer?.interval)}</h2>
         </>

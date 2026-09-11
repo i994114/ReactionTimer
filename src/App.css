@@ -82,6 +82,40 @@
 }
 
 
+.training__title {
+  margin-top: 20px;
+}
+
+.training__countArea {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 200px;
+  width: 200px;
+  border-radius: 200px;
+  border: 10px solid gray;
+  position: relative;
+  margin: 0 auto;
+}
+.training__count--bottom {
+  position: absolute;
+  top: 130px;
+}
+.training__count--big {
+  font-size: 120px;
+}
+.training__count--small {
+  font-size: 60px;
+}
+
+.training__setInfo {
+  margin-top: 20px;
+  font-weight: bold;
+}
+.traing__setCount {
+  display: block;
+}
 
 .padding--small {
   padding: 0 5px;
