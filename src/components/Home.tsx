@@ -43,7 +43,7 @@ function Home() {
   return (
     <div className='home'>
       <h1 className='home__title'>反応トレーニング</h1>
-      <p>好機を捉える初動を磨く</p>
+      <p>「空のようにしずかに、雷よりもすばやく」</p>
 
       <div className='home__btnArea'>
         <button className="btn btn--big btn--primary" onClick={() => navigate('/create')}>
