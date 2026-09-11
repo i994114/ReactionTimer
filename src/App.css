@@ -1,110 +1,173 @@
+/* =========================
+   共通
+========================= */
 
+* {
+  box-sizing: border-box;
+}
 
 main {
   background-color: #F8FAFC;
   min-height: 100vh;
 }
 
+ul {
+  padding: 0;
+}
+
+li {
+  list-style: none;
+}
+
+
+/* =========================
+   Home
+========================= */
+
 .home {
   padding: 20px;
 }
+
+.home__title {
+  padding: 20px 0;
+}
+
 .home__btnArea {
   margin-top: 10px;
   margin-bottom: 20px;
   display: inline-block;
 }
-.home__title {
-  padding: 20px 0;
-}
+
+
+/* =========================
+   Button
+========================= */
 
 .btn {
   display: flex;
   align-items: center;
   justify-content: center;
   gap: 8px;
+
   border-radius: 10px;
   border: none;
+
   transition: 0.2s;
 }
-.btn:hover {
-  cursor: pointer;
-  filter: brightness(90%);
-  transform: translateY(-2px);
-}
+
 .btn--big {
   padding: 20px;
   width: 100%;
 }
+
 .btn--small {
   padding: 10px;
 }
+
 .btn--primary {
   background-color: #2563EB;
   color: #fff;
   font-weight: bold;
   font-size: large;
 }
+
 .btn--normal {
   background-color: #2563EB;
   color: #fff;
   flex: 1;
 }
+
 .btn--low {
   background-color: #F3F4F6;
   color: #374151;
   flex: 1;
 }
+
 .btn--danger {
   background-color: #FEE2E2;
   color: #DC2626;
 }
 
+
+/* PCなどマウス操作時だけhover */
+@media (hover: hover) {
+  .btn:hover {
+    cursor: pointer;
+    filter: brightness(90%);
+    transform: translateY(-2px);
+  }
+}
+
+
+/* =========================
+   Timer Card
+========================= */
+
 .card {
   background-color: white;
-  margin-bottom: 10px;
-  margin: 0 auto;
-  margin-bottom: 10px;
+
+  width: 100%;
+  margin: 0 auto 10px;
   padding: 10px;
+
   border-radius: 10px;
   text-align: left;
 }
+
 .card__name {
   margin-bottom: 5px;
   font-weight: bold;
 }
+
 .card__time {
   display: inline-block;
 }
+
 .card__btnArea {
   display: flex;
   gap: 10px;
   justify-content: center;
+
   margin-top: 10px;
 }
+
 .card__set--small {
   font-size: small;
 }
 
+
+/* =========================
+   Timer Form
+========================= */
+
 .timerForm__form {
-  width: 70%;
+  width: 100%;
   margin: 0 auto;
+  padding: 0 20px;
 }
+
 .timerForm__label {
-  width: 50%;
+  width: 100%;
+
   text-align: left;
   display: block;
+
   margin-top: 20px;
 }
+
 .timerForm__input {
   padding: 10px 5px;
   margin-bottom: 10px;
 }
+
 .timerForm__input--normal {
   width: 100%;
 }
+
 .timerForm__input--short {
   width: 40%;
 }
+
 .timerForm__randomTimeArea {
   display: flex;
   align-items: center;
@@ -117,9 +180,14 @@ main {
 }
 
 
+/* =========================
+   Training
+========================= */
+
 .training {
-  margin: 20px;
+  padding: 20px;
 }
+
 .training__title {
   margin-top: 20px;
 }
@@ -129,9 +197,12 @@ main {
   flex-direction: column;
   align-items: center;
   justify-content: center;
+
   height: 200px;
   width: 200px;
-  border-radius: 200px;
+
+  border-radius: 50%;
+
   position: relative;
   margin: 0 auto;
 
@@ -140,38 +211,89 @@ main {
     gray var(--progress) 100%
   );
 }
+
 .training__countArea::before {
   content: "";
+
   position: absolute;
   inset: 15px;
+
   border-radius: 50%;
   background: white;
+}
+
+.training__count {
+  z-index: 1;
 }
 
 .training__count--bottom {
   position: absolute;
   top: 130px;
 }
+
 .training__count--big {
   font-size: 120px;
-  z-index: 1;
 }
+
 .training__count--small {
   font-size: 60px;
-  z-index: 1;
 }
 
 .training__setInfo {
   margin-top: 20px;
   font-weight: bold;
 }
-.traing__setCount {
+
+.training__setCount {
   display: block;
 }
+
 .training__finishArea {
   margin-top: 30px;
 }
 
+
+/* =========================
+   Utility
+========================= */
+
 .padding--small {
   padding: 0 5px;
+}
+
+
+/* =========================
+   Tablet / PC
+   768px以上
+========================= */
+
+@media screen and (min-width: 768px) {
+
+  .home,
+  .training {
+    width: 700px;
+    margin: 0 auto;
+  }
+
+  .card {
+    padding: 20px;
+  }
+
+  .timerForm__form {
+    width: 600px;
+    padding: 0;
+  }
+
+  .training__countArea {
+    width: 240px;
+    height: 240px;
+  }
+
+  .training__count--bottom {
+    top: 155px;
+  }
+
+  .training__count--small {
+    font-size: 70px;
+  }
 }
