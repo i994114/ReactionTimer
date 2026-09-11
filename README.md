@@ -1,75 +1,227 @@
-# React + TypeScript + Vite
+# ReactionTimer
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+予測できないタイミングで鳴る合図に反応するための、トレーニング用ランダムタイマーです。
 
-Currently, two official plugins are available:
+指定した範囲内から待ち時間を毎回ランダムに決定し、トレーニング中に合図音を再生します。トレーニング時間、インターバル時間、ラウンド数を設定でき、作成した設定はブラウザに保存されます。
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+## Screenshots
 
-## React Compiler
+| タイマー一覧 | タイマー設定 | トレーニング |
+| :---: | :---: | :---: |
+| <img src="./docs/images/home-mobile.png" width="240" alt="タイマー一覧画面"> | <img src="./docs/images/timer-form-mobile.png" width="240" alt="タイマー設定画面"> | <img src="./docs/images/training-mobile.png" width="240" alt="トレーニング画面"> |
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+## 概要
 
-## Expanding the ESLint configuration
+剣道やキックボクシングなどで、合図に対する初動を鍛えることを目的に作成しました。
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+一般的なインターバルタイマーとは異なり、合図音が鳴るまでの時間を固定しません。たとえばランダム間隔を1〜3秒に設定すると、トレーニング中はその範囲から待ち時間を毎回抽選して合図音を鳴らします。
 
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
-
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-
+```text
+トレーニング開始
+    ↓
+ランダムな時間だけ待機
+    ↓
+合図音を再生
+    ↓
+次の待ち時間を再抽選
+    ↓
+トレーニング終了まで繰り返す
 ```
 
-You can also install [eslint-plugin-react-x](https://npmx.dev/package/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://npmx.dev/package/eslint-plugin-react-dom) for React-specific lint rules:
+## 主な機能
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+- タイマー設定の新規作成
+- 保存したタイマー設定の編集・削除
+- `localStorage`への設定保存
+- 開始前の3秒カウントダウン
+- トレーニング時間とインターバル時間のカウントダウン
+- 指定範囲内のランダムなタイミングで合図音を再生
+- 複数ラウンドの実行
+- カウントダウン音・開始音・終了音の再生
+- 全ラウンド終了後の再実行
+- 円形プログレスによる残り時間表示
+- スマートフォン・PCのレスポンシブ対応
 
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+## 使い方
 
+1. 「新しい設定を作成」を選択します。
+2. タイマー名、ランダム間隔、トレーニング時間、インターバル時間、ラウンド数を入力します。
+3. 設定を保存し、一覧画面の「開始」を選択します。
+4. 3秒のカウントダウン後、トレーニングが始まります。
+5. 合図音が鳴った瞬間に、あらかじめ決めた動作を行います。
+6. 設定したラウンド数が終了すると、再実行または一覧画面への移動を選択できます。
+
+### 設定例
+
+```text
+ランダム間隔：1〜3秒
+トレーニング：3分
+インターバル：1分
+ラウンド数　：3回
 ```
+
+## 使用技術
+
+| 技術 | 用途 |
+| --- | --- |
+| React | UI構築とstate管理 |
+| TypeScript | 型定義と型チェック |
+| React Router | 画面遷移とURLパラメーターの取得 |
+| localStorage | タイマー設定の保存 |
+| CSS | レイアウト、円形プログレス、レスポンシブ対応 |
+| `Audio`（`HTMLAudioElement`） | 効果音の再生 |
+| Lucide React | 操作ボタンのアイコン |
+| Vite | 開発環境とビルド |
+
+音声再生にはWeb Audio APIではなく、ブラウザ標準の`new Audio()`を使用しています。
+
+## 画面構成
+
+| パス | 画面 | 内容 |
+| --- | --- | --- |
+| `/` | タイマー一覧 | 設定の一覧表示・開始・編集・削除 |
+| `/create` | 新規作成 | 新しいタイマー設定の作成 |
+| `/edit/:id` | 編集 | 指定したタイマー設定の編集 |
+| `/training/:id` | トレーニング | 指定した設定でトレーニングを実行 |
+
+新規作成と編集は入力項目が同じため、1つの`TimerForm`コンポーネントを共用しています。
+
+## 実装上のポイント
+
+### Phaseによる状態管理
+
+トレーニング全体を4つの状態に分けています。
+
+```ts
+type Phase = 'countdown' | 'training' | 'interval' | 'finished';
+```
+
+```text
+countdown
+    ↓
+training
+    ↓
+最終ラウンドではない → interval → 次のtraining
+    ↓
+最終ラウンド → finished
+```
+
+残り時間だけから現在の状態を推測せず、`phase`を処理と画面表示の切り替え条件にしています。
+
+### ランダムな合図音
+
+`Math.random()`で最小値から最大値までの待ち時間を作り、`setTimeout`で音を予約します。
+
+音が鳴った後に次の待ち時間を改めて決めることで、毎回異なる間隔で合図音を再生します。トレーニング終了時には予約中の`setTimeout`を解除します。
+
+### タイマー処理の分離
+
+画面の残り時間には`setInterval`、ランダムな合図音には`setTimeout`を使用しています。
+
+```text
+setInterval
+└─ 1秒ごとに残り時間を減らす
+
+setTimeout
+└─ ランダムな時間だけ待って合図音を鳴らす
+```
+
+カウント処理とフェーズ遷移も別々の`useEffect`へ分け、各処理の役割を明確にしています。
+
+### localStorageの型チェック
+
+`JSON.parse()`の結果を`unknown`として受け取り、独自の型ガードで各プロパティを確認してから`Timer[]`として使用します。
+
+保存データが存在しない場合、JSONの解析に失敗した場合、データ形式が不正な場合は、フォールバック値を返します。
+
+### 円形プログレス
+
+残り時間から進捗率を計算し、ReactからCSSカスタムプロパティ`--progress`へ渡しています。
+
+CSS側では`conic-gradient`で進捗を描画し、中央へ一回り小さい円を重ねてリング状にしています。
+
+## ディレクトリ構成
+
+主要なファイルは次のとおりです。
+
+```text
+ReactionTimer/
+├── docs/
+│   └── images/
+│       ├── home-mobile.png
+│       ├── timer-form-mobile.png
+│       └── training-mobile.png
+├── public/
+│   └── sounds/
+│       ├── piro.mp3
+│       ├── countdown.mp3
+│       ├── start.mp3
+│       └── end.mp3
+├── src/
+│   ├── components/
+│   │   ├── Home.tsx
+│   │   ├── TimerForm.tsx
+│   │   ├── TimerList.tsx
+│   │   └── Training.tsx
+│   ├── types/
+│   │   └── timer.ts
+│   ├── utils/
+│   │   └── timerStorage.ts
+│   ├── App.css
+│   ├── App.tsx
+│   ├── index.css
+│   └── main.tsx
+├── package.json
+└── README.md
+```
+
+## セットアップ
+
+### 必要な環境
+
+- Node.js
+- npm
+
+### 起動方法
+
+リポジトリのディレクトリで、依存パッケージをインストールします。
+
+```bash
+npm install
+```
+
+開発サーバーを起動します。
+
+```bash
+npm run dev
+```
+
+ターミナルに表示されたローカルURLをブラウザで開いてください。
+
+### ビルド
+
+```bash
+npm run build
+```
+
+## データの保存について
+
+作成したタイマー設定は、ブラウザの`localStorage`へ保存されます。
+
+サーバーやデータベースには保存されないため、別のブラウザや端末とは共有されません。また、ブラウザのサイトデータを削除すると設定も消去されます。
+
+## 今後の改善予定
+
+- 音声オブジェクトを`useRef`で保持する
+- 一時停止・再開機能を追加する
+- 用途別プリセットを追加する
+- 合図音を選択できるようにする
+- トレーニング履歴を保存する
+- PWAに対応する
+- 入力値とエラー表示を改善する
+
+## 制作を通して学んだこと
+
+単純なカウントダウンだけでなく、開始前、トレーニング、インターバル、終了という状態遷移を扱うことで、Reactにおけるstate設計と`useEffect`の役割を学びました。
+
+また、非同期タイマーのクリーンアップ、`localStorage`から取得したデータの型チェック、Reactで計算した値をCSSへ渡す方法など、実際に動くアプリを通してReact / TypeScriptの基本を整理できました。
