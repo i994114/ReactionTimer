@@ -20,8 +20,6 @@ function Training() {
   const trainingStartAudio = new Audio('/sounds/start.mp3')
   const trainingEndAudio = new Audio('/sounds/end.mp3')
 
-  const progress = trainingTime / timer?.trainingTime * 100;
-
   //開始ダウンタイマー
   useEffect(() => {
     if (phase !== 'countdown') {
@@ -188,7 +186,17 @@ function Training() {
   if (!timer) {
     return <p>タイマーが見つかりません。</p>;
   }
-  
+
+  //円型プログレス
+  let progress;
+  if (phase === 'training') {
+    progress = trainingTime / timer?.trainingTime * 100;
+  } else if (phase === 'interval') {
+    progress = intervalTime / timer?.interval * 100;
+  } else {
+    progress = 0;
+  }
+
   return (
     <div className="training">
       <h1>{timer?.name}</h1>
@@ -221,8 +229,11 @@ function Training() {
       {phase === 'interval' && (
         <>
           <h2 className="training__title">インターバル中</h2>
-          <h2>{formatTime(intervalTime)}</h2>
-          <h2>/{formatTime(timer?.interval)}</h2>
+          <h2 >{currentRound} / {timer?.rounds} TURN</h2>
+          <div className="training__countArea"  style={{ "--progress": `${progress}%` } as React.CSSProperties}>
+            <p className="training__count training__count--small">{formatTime(intervalTime)}</p>
+            <span className="training__count training__count--bottom">/{formatTime(timer.interval)}</span>
+          </div>
         </>
       )}
       
