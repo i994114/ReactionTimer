@@ -5,10 +5,8 @@
 指定した範囲内から待ち時間を毎回ランダムに決定し、トレーニング中に合図音を再生します。トレーニング時間、インターバル時間、ラウンド数を設定でき、作成した設定はブラウザに保存されます。
 
 ## Screenshots
+![全体画像](https://qiita-user-contents.imgix.net/https%3A%2F%2Fqiita-image-store.s3.ap-northeast-1.amazonaws.com%2F0%2F4327184%2F18af70d0-ce40-49ae-a93c-191f1e3eedf8.png?ixlib=rb-4.1.1&auto=format&gif-q=60&q=75&s=900786eb198785da792760d3daaf63c0)
 
-| タイマー一覧 | タイマー設定 | トレーニング |
-| :---: | :---: | :---: |
-| <img src="./docs/images/home-mobile.png" width="240" alt="タイマー一覧画面"> | <img src="./docs/images/timer-form-mobile.png" width="240" alt="タイマー設定画面"> | <img src="./docs/images/training-mobile.png" width="240" alt="トレーニング画面"> |
 
 ## 概要
 
