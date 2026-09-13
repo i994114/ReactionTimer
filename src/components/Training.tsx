@@ -198,7 +198,7 @@ function Training() {
   }
 
   return (
-    <div className="training">
+    <div className={`training ${ phase === "interval"? "training--interval" : ""}`} >
       <h1>{timer?.name}</h1>
       <button className="btn btn--big btn--primary" onClick={() => navigate('/')} >一覧に戻る</button>
       {phase === 'countdown' && (
