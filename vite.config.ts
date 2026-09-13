@@ -2,11 +2,12 @@ import { defineConfig } from 'vite'
 import react from '@vitejs/plugin-react'
 import { VitePWA } from 'vite-plugin-pwa'
 
-export default defineConfig({
-  base: '/ReactionTimer/',
+export default defineConfig(({ command }) => ({
+  base: command === 'build' ? '/ReactionTimer/' : '/',
 
   plugins: [
     react(),
+
     VitePWA({
       registerType: 'autoUpdate',
 
@@ -21,12 +22,12 @@ export default defineConfig({
 
         icons: [
           {
-            src: '/ReactionTimer/icon-192.png',
+            src: 'icon-192.png',
             sizes: '192x192',
             type: 'image/png',
           },
           {
-            src: '/ReactionTimer/icon-512.png',
+            src: 'icon-512.png',
             sizes: '512x512',
             type: 'image/png',
           },
@@ -34,4 +35,4 @@ export default defineConfig({
       },
     }),
   ],
-})
+}))

@@ -15,10 +15,12 @@ function Training() {
   const [intervalTime, setIntervalTime] = useState(timer?.interval ?? 0);
   const [currentRound, setCurrentRound] = useState(1);
 
-  const randomAudio = new Audio('/sounds/piro.mp3');
-  const countdownAudio = new Audio('/sounds/countdown.mp3')
-  const trainingStartAudio = new Audio('/sounds/start.mp3')
-  const trainingEndAudio = new Audio('/sounds/end.mp3')
+  const baseUrl = import.meta.env.BASE_URL;
+
+  const randomAudio = new Audio(`${baseUrl}sounds/piro.mp3`);
+  const countdownAudio = new Audio(`${baseUrl}sounds/countdown.mp3`);
+  const trainingStartAudio = new Audio(`${baseUrl}sounds/start.mp3`);
+  const trainingEndAudio = new Audio(`${baseUrl}sounds/end.mp3`);
 
   //開始ダウンタイマー
   useEffect(() => {
