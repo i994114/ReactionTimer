@@ -39,7 +39,8 @@
 - 全ラウンド終了後の再実行
 - 円形プログレスによる残り時間表示
 - スマートフォン・PCのレスポンシブ対応
-
+- PWA対応（スマートフォンのホーム画面への追加・アプリとして起動）
+  
 ## 使い方
 
 1. 「新しい設定を作成」を選択します。
@@ -70,6 +71,7 @@
 | `Audio`（`HTMLAudioElement`） | 効果音の再生 |
 | Lucide React | 操作ボタンのアイコン |
 | Vite | 開発環境とビルド |
+| vite-plugin-pwa | PWA対応、Web App Manifest・Service Workerの生成 |
 
 音声再生にはWeb Audio APIではなく、ブラウザ標準の`new Audio()`を使用しています。
 
@@ -138,6 +140,14 @@ setTimeout
 
 CSS側では`conic-gradient`で進捗を描画し、中央へ一回り小さい円を重ねてリング状にしています。
 
+### PWA対応
+
+`vite-plugin-pwa`を使用してPWAに対応しています。
+
+スマートフォンではブラウザからホーム画面へ追加でき、通常のWebページだけでなく、アプリに近い形式で起動できます。
+
+また、開発環境では `/`、本番環境では `/ReactionTimer/` 配下で動作するため、Viteの`BASE_URL`を利用してルーティングや音声ファイルのパスを切り替えています。
+
 ## ディレクトリ構成
 
 主要なファイルは次のとおりです。
@@ -150,11 +160,14 @@ ReactionTimer/
 │       ├── timer-form-mobile.png
 │       └── training-mobile.png
 ├── public/
-│   └── sounds/
-│       ├── piro.mp3
-│       ├── countdown.mp3
-│       ├── start.mp3
-│       └── end.mp3
+│   ├── sounds/
+│   │   ├── piro.mp3
+│   │   ├── countdown.mp3
+│   │   ├── start.mp3
+│   │   └── end.mp3
+│   ├── icon-192.png
+│   ├── icon-512.png
+│   └── favicon.ico
 ├── src/
 │   ├── components/
 │   │   ├── Home.tsx
@@ -215,7 +228,6 @@ npm run build
 - 用途別プリセットを追加する
 - 合図音を選択できるようにする
 - トレーニング履歴を保存する
-- PWAに対応する
 - 入力値とエラー表示を改善する
 
 ## 制作を通して学んだこと
