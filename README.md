@@ -4,6 +4,9 @@
 
 指定した範囲内から待ち時間を毎回ランダムに決定し、トレーニング中に合図音を再生します。トレーニング時間、インターバル時間、ラウンド数を設定でき、作成した設定はブラウザに保存されます。
 
+- デモ: [ReactionTimer](https://yk-lab.jp/ReactionTimer/)
+- 開発記事（Qiita）: [Qiita記事はこちら](https://qiita.com/kaz_pro/items/df999be0d12ba9f6f4b2)
+- リポジトリ: [i994114/KENYU](https://github.com/i994114/KENYU)
 ## Screenshots
 ![全体画像](https://qiita-user-contents.imgix.net/https%3A%2F%2Fqiita-image-store.s3.ap-northeast-1.amazonaws.com%2F0%2F4327184%2F18af70d0-ce40-49ae-a93c-191f1e3eedf8.png?ixlib=rb-4.1.1&auto=format&gif-q=60&q=75&s=900786eb198785da792760d3daaf63c0)
 
