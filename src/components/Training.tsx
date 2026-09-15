@@ -17,10 +17,10 @@ function Training() {
 
   const baseUrl = import.meta.env.BASE_URL;
 
-  const randomAudio = new Audio(`${baseUrl}sounds/piro.mp3`);
-  const countdownAudio = new Audio(`${baseUrl}sounds/countdown.mp3`);
-  const trainingStartAudio = new Audio(`${baseUrl}sounds/start.mp3`);
-  const trainingEndAudio = new Audio(`${baseUrl}sounds/end.mp3`);
+  const [randomAudio] = useState(() => new Audio(`${baseUrl}sounds/piro.mp3`));
+  const [countdownAudio] = useState(() => new Audio(`${baseUrl}sounds/countdown.mp3`));
+  const [trainingStartAudio] = useState(() => new Audio(`${baseUrl}sounds/start.mp3`));
+  const [trainingEndAudio] = useState(() => new Audio(`${baseUrl}sounds/end.mp3`));
 
   //開始ダウンタイマー
   useEffect(() => {
