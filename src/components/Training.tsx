@@ -102,6 +102,7 @@ function Training() {
     if (phase !== 'training') {
       return;
     }
+
     if (trainingTime !== 0) {
       return;
     }
@@ -110,13 +111,20 @@ function Training() {
       return;
     }
 
+    // ランダム音が鳴っていたら停止
+    randomAudio.pause();
+    randomAudio.currentTime = 0;
+
+    // 終了ゴングを鳴らす
+    trainingEndAudio.currentTime = 0;
+    trainingEndAudio.play();
+
     if (currentRound < timer.rounds) {
       setPhase('interval');
-      trainingStartAudio.play()
     } else {
       setPhase('finished');
-      trainingEndAudio.play();
     }
+
   }, [phase, trainingTime]);
 
   //インターバル時間
